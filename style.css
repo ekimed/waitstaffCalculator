@@ -1,0 +1,27 @@
+body {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	background-color: #e1e3e4;
+}
+h1 {
+	text-align: center;
+	font-family: 'Lato';
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: normal;
+}
+
+.container {
+	text-align: center
+}
+
+[class*='col-'] {
+	float: left;
+	height: 500px;
+}
+
+.col-1, .col-2 {
+	width: 45%;
+}
