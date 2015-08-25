@@ -1,9 +1,29 @@
 angular.module('waitstaffCalc', ['ngMessages'])
+	.config(['$routeProvider', function ($routeProvider) {
+		$routeProvider.when('/', {
+			templateUrl:'index.html',
+			controller: 'HomeCtrl'
+		})
+		.when('/new-meal', {
+			templateUrl: 'newMeal.html',
+			controller: 'NewMealCtrl'
+		})
+		.when('/my-earnings', {
+			templateUrl: 'myEarnings.html',
+			controller: 'MyEarningsCtrl'
+		})
+		.when('/error', {
+			templateUrl: 'error.html',
+			controller: 'ErrorCtrl'
+		})
+		.otherwise('/');
+	}])
+	.run(function ($rootScope, $location) {
+		$rootScope.$on('$routeChangeError', function () {
+			$location.path('/error');
+		})
+	})
 	.controller('myCtrl', function ($scope) {
-		// why can't I assign scope to a variable
-		// var basePrice = $scope.basePrice;
-		// var taxRate = $scope.taxRate;
-
 		var defaultEarnings = {
 			"tipTotal": 0.00,
 			"mealCount": 0,
