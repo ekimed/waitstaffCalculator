@@ -4,89 +4,19 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
 	<link href='http://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
-	<script data-require="angular.js@1.3.10" data-semver="1.3.10" src="https://code.angularjs.org/1.3.10/angular.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
 	<title>Waitstaff Calculator</title>
 </head>
 <body ng-controller="myCtrl">
-		<h1>Waitstaff Calculator</h1>
-		<div class="container">
-			<div ng-if="mealDetails.$submitted && mealDetails.$invalid" ng-messages="mealDetails.$error">
-				<p class="error" ng-message="required">Please fill out all fields.</p>
-			</div>
-			<div class="col-1 sect">
-				<form name="mealDetails" class="meal-details" ng-submit="submit(mealDetails)" novalidate>
-					<h2>Enter the Meal Details</h2>
-					<div class="col-sm-1">
-						<p class="row">Base Meal Price: $</p>
-						<p class="row">Tax Rate: </p>
-						<p class="row">Tip Percentage: %</p>
-					</div>
-					<div class="col-sm-2">
-						<div class="row">
-							<input type="number" name="base meal price" ng-model="meal.basePrice" required>
-						</div>
-						<div class="row">
-							<input type="number" name="tax rate" ng-model="meal.taxRate" required>
-						</div>
-						<div class="row">
-							<input type="number" name="tip percentage" ng-model="meal.tipPercent" required>
-						</div>
-					</div>
-					<div class="btn-container">
-						<button type="submit">Submit</button>
-						<button type="button" ng-click="cancel()">Cancel</button>
-					</div>
-				</div>
-			</form>
-			<div class="col-2">
-				<div class="charges sect">
-					<h2>Customer Charges</h2>
-					<div class="inner-container">
-						<div class="col-sm-1">
-							<p class="row">Subtotal: </p>
-							<p class="row">Tip: </p>
-							<p class="row">Total: </p>
-						</div>
-						<div class="col-sm-2">
-							<p class="row">{{subtotal | currency}}</p>
-							<p class="row">{{tip | currency}}</p>
-							<p class="row">{{total | currency}}</p>
-						</div>
-					</div>
-					
-				</div>
-				<div class="earnings-info sect">
-					<h2>My Earnings Info</h2>
-					<!-- <div>
-						Tip total: {{earnInfo.tipTotal | currency}}
-					</div>
-					<div>
-						Meal count: {{earnInfo.mealCount}}
-					</div>
-					<div>
-						Average Tip Per Meal: {{earnInfo.avgTipMeal | currency}}
-					</div> -->
-					<div class="inner-container">
-						<div class="col-sm-1">
-							<p class="row">Tip total: </p>
-							<p class="row">Meal Count: </p>
-							<p class="row">Average Tip Per Meal: </p>
-						</div>
-						<div class="col-sm-2">
-							<p class="row">{{earnInfo.tipTotal | currency}}</p>
-							<p class="row">{{earnInfo.mealCount}}</p>
-							<p class="row">{{earnInfo.avgTipMeal | currency}}</p>
-						</div>
-						<div>
-							<button ng-click="resetAll()">Reset</button>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		
+	<h1>Waitstaff Calculator</h1>
+	<div class="link-nav">
+		<a href="#/">Home</a>
+		<a href="#/new-meal">New Meal</a>
+		<a href="#/my-earnings">My Earnings</a>	
+	</div>
+	<div ng-view></div>	
 	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

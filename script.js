@@ -1,7 +1,7 @@
-angular.module('waitstaffCalc', ['ngMessages'])
+angular.module('waitstaffCalc', ['ngMessages', 'ngRoute'])
 	.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.when('/', {
-			templateUrl:'index.html',
+			templateUrl: 'home.html',
 			controller: 'HomeCtrl'
 		})
 		.when('/new-meal', {
@@ -11,32 +11,30 @@ angular.module('waitstaffCalc', ['ngMessages'])
 		.when('/my-earnings', {
 			templateUrl: 'myEarnings.html',
 			controller: 'MyEarningsCtrl'
-		})
-		.when('/error', {
-			templateUrl: 'error.html',
-			controller: 'ErrorCtrl'
-		})
-		.otherwise('/');
+		});
 	}])
-	.run(function ($rootScope, $location) {
-		$rootScope.$on('$routeChangeError', function () {
-			$location.path('/error');
-		})
-	})
-	.controller('myCtrl', function ($scope) {
+	.run(function ($rootScope) {
 		var defaultEarnings = {
 			"tipTotal": 0.00,
 			"mealCount": 0,
 			"avgTipMeal": 0.00
 		};
 
+		// initial values
+		$rootScope.earnInfo = angular.copy(defaultEarnings);
+		$rootScope.defaultEarnings = defaultEarnings;
+	})
+	.controller('myCtrl', function ($scope) {
+		// nothing here yet...
+	})
+	.controller('NewMealCtrl', function ($scope, $rootScope) {
 		var setInitValues = function () {
 			// inital values:
 			$scope.subtotal = 0.00;
 			$scope.tip = 0.00;
 			$scope.total = 0.00;
-			$scope.earnInfo = angular.copy(defaultEarnings);
-		}
+			
+		};
 
 		var resetForm = function () {
 			$scope.meal = {
@@ -45,7 +43,7 @@ angular.module('waitstaffCalc', ['ngMessages'])
 				"tipPercent": null
 			}
 
-		}
+		};
 
 		setInitValues();
 		
@@ -56,14 +54,11 @@ angular.module('waitstaffCalc', ['ngMessages'])
 				$scope.tip = $scope.meal.basePrice * ($scope.meal.tipPercent/100);
 				$scope.total = $scope.subtotal + $scope.tip;
 
-				// my earnings info update
-				$scope.earnInfo.tipTotal = $scope.earnInfo.tipTotal + $scope.tip;
-				$scope.earnInfo.mealCount ++;
-				$scope.earnInfo.avgTipMeal = $scope.earnInfo.tipTotal / $scope.earnInfo.mealCount;
+				// my earnings update
+				$rootScope.earnInfo.tipTotal = $rootScope.earnInfo.tipTotal + $scope.tip;
+				$rootScope.earnInfo.mealCount++;
+				$rootScope.earnInfo.avgTipMeal = $rootScope.earnInfo.tipTotal / $rootScope.earnInfo.mealCount;
 
-				console.log(defaultEarnings)
-
-				
 				// reset the form
 				$scope.mealDetails.$setPristine();
 				resetForm();
@@ -72,11 +67,17 @@ angular.module('waitstaffCalc', ['ngMessages'])
 
 		$scope.cancel = function () {
 			resetForm();
-		}
+		};
+	})
+	.controller('MyEarningsCtrl', function ($scope, $rootScope) {
+		
+
+		// my earnings info update
+		// $scope.earnInfo.tipTotal = $scope.earnInfo.tipTotal + $scope.tip;
+		// $scope.earnInfo.mealCount ++;
+		// $scope.earnInfo.avgTipMeal = $scope.earnInfo.tipTotal / $scope.earnInfo.mealCount;
 
 		$scope.resetAll = function () {
-			$scope.earnInfo = defaultEarnings;
-			setInitValues();
-		}
-
-	})
+			$rootScope.earnInfo = $rootScope.defaultEarnings;
+		};
+	});

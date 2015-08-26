@@ -12,9 +12,11 @@ h1 {
 h2 {
 	font-weight: normal;
 	border-bottom: 1px solid rgba(63, 68, 72, 0.29);
+	text-align: center;
 }
 
-button {
+.btn-container {
+	text-align: center;
 	margin-top: 10px;
 }
 
@@ -23,8 +25,23 @@ button {
 	height: 400px;
 }
 
+.home-container {
+	margin: 0 auto;
+	width: 50%;
+	height: auto;
+}
+
 .row {
 	padding: 3px 0;
+}
+
+.link-nav {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.resetWrapper {
+	text-align: center;
 }
 
 [class*='col-'] {
@@ -40,7 +57,7 @@ button {
 }
 
 form[name="mealDetails"], .charges, .earnings-info {
-	width: 90%;
+	width: 60%;
 	height: 300px;
 	margin: 0 auto;
 	background-color: white;
@@ -75,5 +92,9 @@ form.ng-submitted input.ng-invalid {
 
 .earnings-info .inner-container {
 	width: 60%;
+}
+
+.sect {
+	margin-top: 35px;
 }
 
