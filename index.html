@@ -4,9 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
 	<link href='http://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
+
 	<title>Waitstaff Calculator</title>
 </head>
 <body ng-controller="myCtrl">
@@ -16,7 +14,13 @@
 		<a href="#/new-meal">New Meal</a>
 		<a href="#/my-earnings">My Earnings</a>	
 	</div>
-	<div ng-view></div>	
+	<div class="animate-view-container">
+		<div ng-view class="animate-view"></div>
+	</div>
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
